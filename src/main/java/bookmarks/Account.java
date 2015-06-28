@@ -1,6 +1,6 @@
 package bookmarks;
 
-@entity
+//@entity
 public class Account {
 
 }
