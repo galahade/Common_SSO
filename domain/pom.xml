@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.yang.young.common</groupId>
+		<groupId>com.yang.young.common.sso</groupId>
 		<artifactId>sso-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
