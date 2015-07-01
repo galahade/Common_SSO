@@ -8,6 +8,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.Filter;
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -31,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.filter.AbstractRequestLoggingFilter;
 
 @Configuration
 @ComponentScan
@@ -49,6 +53,30 @@ public class Application {
 	}
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+    }
+    
+    @Bean
+    public Filter loggingFilter(){
+        AbstractRequestLoggingFilter f = new AbstractRequestLoggingFilter() {
+
+            @Override
+            protected void beforeRequest(HttpServletRequest request, String message) {
+                System.out.println("message");
+            }
+
+            @Override
+            protected void afterRequest(HttpServletRequest request, String message) {
+                System.out.println("message");
+            }
+        };
+        f.setIncludeClientInfo(true);
+        f.setIncludePayload(true);
+        f.setIncludeQueryString(true);
+
+        f.setBeforeMessagePrefix("BEFORE REQUEST  [");
+        f.setAfterMessagePrefix("AFTER REQUEST    [");
+        f.setAfterMessageSuffix("]\n");
+        return f;
     }
 }
 
