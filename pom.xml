@@ -19,6 +19,7 @@
 		<module>domain</module>
 		<module>test</module>
 		<module>hateoas</module>
+		<module>security</module>
     </modules>
 
 	<properties>
