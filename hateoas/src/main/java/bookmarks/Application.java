@@ -52,7 +52,10 @@ public class Application {
 						});
 	}
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication app = new SpringApplication(Application.class);
+        app.setShowBanner(false);
+		app.run(args);
+        
     }
     
     @Bean

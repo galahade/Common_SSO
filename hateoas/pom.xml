@@ -46,8 +46,16 @@
                     <server>tomcat</server>
                     <path>/${project.build.finalName}</path>
                     <!-- war文件路径缺省情况下指向target -->
-                    <warFile>${basedir}/target/${project.build.finalName}.war</warFile><!---->
+                   <!-- <warFile>${basedir}/target/${project.build.finalName}.war</warFile>-->
                 </configuration>
+            </plugin>
+            <plugin>
+				<!-- create an executable jar  
+				run "mvn package" to create jar file
+				To run that application, use the “java -jar” command:
+				-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 		</plugins>
 	</build>

@@ -13,7 +13,6 @@
 	<packaging>jar</packaging>
 	
 	<dependencies>
-
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
@@ -29,7 +28,6 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<scope>compile</scope>
 		</dependency>
-
 	</dependencies>
 
 </project>

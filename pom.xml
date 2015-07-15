@@ -87,18 +87,9 @@
 	</dependencyManagement>
 
 	<build>
-		<finalName>myApp</finalName>
         <!-- directory缺省情况下指向target --> 
         <!--<directory>${basedir}/target</directory>-->
 		<plugins>
-			<plugin>
-				<!-- create an executable jar  
-				run "mvn package" to create jar file
-				To run that application, use the “java -jar” command:
-				-->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

@@ -68,6 +68,14 @@
                     <warFile>${basedir}/target/${project.build.finalName}.war</warFile><!---->
                 </configuration>
             </plugin>
+            <plugin>
+				<!-- create an executable jar  
+				run "mvn package" to create jar file
+				To run that application, use the “java -jar” command:
+				-->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
 		</plugins>
 	</build>
 </project>
