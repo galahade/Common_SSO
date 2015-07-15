@@ -61,12 +61,12 @@ public class Application {
 
             @Override
             protected void beforeRequest(HttpServletRequest request, String message) {
-                System.out.println("message");
+                System.out.println(message);
             }
 
             @Override
             protected void afterRequest(HttpServletRequest request, String message) {
-                System.out.println("message");
+            	System.out.println(message);
             }
         };
         f.setIncludeClientInfo(true);
@@ -95,6 +95,16 @@ class BookmarkResource extends ResourceSupport {
     public Bookmark getBookmark() {
         return bookmark;
     }
+}
+
+@RestController
+class Example {
+	
+	@RequestMapping("/")
+	String home() {
+		return "Hello World!";
+	}
+	
 }
 
 
