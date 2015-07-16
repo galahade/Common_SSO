@@ -6,12 +6,16 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -57,6 +61,9 @@ public class Application {
 		app.run(args);
         
     }
+    //test properties file value
+    @Value("${test.name}")
+    private String name;
     
     @Bean
     public Filter loggingFilter(){
@@ -64,7 +71,7 @@ public class Application {
 
             @Override
             protected void beforeRequest(HttpServletRequest request, String message) {
-                System.out.println(message);
+                System.out.println(name+message);
             }
 
             @Override
@@ -103,8 +110,18 @@ class BookmarkResource extends ResourceSupport {
 @RestController
 class Example {
 	
+	private Logger log = LoggerFactory.getLogger(this.getClass());
+	
 	@RequestMapping("/")
 	String home() {
+		log.info("info level log");
+		log.debug("debug level log");
+		log.error("error level log");
+		Properties p = System.getProperties();
+		p.forEach((t,u) -> {
+							log.info(t.toString()+":"+u.toString());
+		});
+		log.info("LOG_FILE:"+System.getProperty("LOG_PATH"));
 		return "Hello World!";
 	}
 	
