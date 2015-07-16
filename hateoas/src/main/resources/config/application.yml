@@ -1,0 +1,63 @@
+#common config
+---
+spring:
+    application:
+        name: bookmark
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:tcp://localhost/~/bookmark
+        username: sa
+server:
+    port: 9000
+  
+logging:
+    level:
+        bookmarks: DEBUG
+        org.springframework.web: DEBUG   
+     
+test:
+    name:common
+#dev evn
+---
+spring:
+    profiles: development
+    application:
+        name: bookmark
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:tcp://localhost/~/bookmark
+        username: sa
+        
+server:
+    port: 8080
+
+   
+logging:
+    level:
+        bookmarks: DEBUG
+        org.springframework.web: DEBUG 
+test:
+    name: development
+    
+#production evn
+---
+
+spring:
+    profiles: production
+    application:
+        name: bookmark
+    datasource:
+        driverClassName: org.h2.Driver
+        url: jdbc:h2:tcp://localhost/~/bookmark
+        username: sa
+        
+server:
+    port: 80
+          
+logging:
+    level:
+        bookmarks: INFO
+        org.springframework.web: INFO
+
+test:
+    name: production

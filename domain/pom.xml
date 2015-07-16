@@ -28,6 +28,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time-hibernate</artifactId>
+			<version>${jodatime-hibernate.version}</version>
+		</dependency>
 	</dependencies>
 
 </project>

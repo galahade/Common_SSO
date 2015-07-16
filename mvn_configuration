@@ -1,0 +1,6 @@
+Run_hateoas_project:
+--mvn spring-boot:run --debug
+--vm arg :-server -Xms512m -Xmx1024m -XX:+CMSClassUnloadingEnabled -XX:+PrintGCDetails  -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=%M2_HOME%/java_pid.hprof
+
+Common_SSO_clean_install:
+--mvn clean install

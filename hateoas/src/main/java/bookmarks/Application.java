@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.Filter;
 import javax.servlet.http.HttpServletRequest;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,8 +63,8 @@ public class Application {
         
     }
     //test properties file value
-    @Value("${test.name}")
-    private String name;
+//    @Value("${spring.profiles}")
+//    private String name;
     
     @Bean
     public Filter loggingFilter(){
@@ -71,12 +72,12 @@ public class Application {
 
             @Override
             protected void beforeRequest(HttpServletRequest request, String message) {
-                System.out.println(name+message);
+               // System.out.println(name+"_"+message);
             }
 
             @Override
             protected void afterRequest(HttpServletRequest request, String message) {
-            	System.out.println(message);
+            	//System.out.println(name+"_"+message);
             }
         };
         f.setIncludeClientInfo(true);
@@ -90,6 +91,7 @@ public class Application {
     }
 }
 
+@XmlRootElement
 class BookmarkResource extends ResourceSupport {
 
     private final Bookmark bookmark;
@@ -131,6 +133,7 @@ class Example {
 @RestController
 @RequestMapping("/{userId}/bookmarks")
 class BookmarkRestController {
+	private Logger log = LoggerFactory.getLogger(this.getClass());
 
     private final BookmarkRepository bookmarkRepository;
 
@@ -164,13 +167,15 @@ class BookmarkRestController {
 
     @RequestMapping(method = RequestMethod.GET)
     Resources<BookmarkResource> readBookmarks(@PathVariable String userId) {
-
+    	log.debug("method : {}, userId : {}", "readBookmarks", userId);
+    	
         this.validateUser(userId);
 
         List<BookmarkResource> bookmarkResourceList = bookmarkRepository.findByAccountUsername(userId)
                 .stream()
                 .map(BookmarkResource::new)
                 .collect(Collectors.toList());
+        log.debug("bookmarkResourceList size is " + bookmarkResourceList.size());
         return new Resources<BookmarkResource>(bookmarkResourceList);
     }
 
@@ -184,6 +189,7 @@ class BookmarkRestController {
     private void validateUser(String userId) {
         this.accountRepository.findByUsername(userId)
                 .orElseThrow(() -> new UserNotFoundException(userId));
+        log.debug("method : {}, success", "validateUser");
     }
 }
 
