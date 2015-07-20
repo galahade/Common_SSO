@@ -5,9 +5,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-@MappedSuperclass
-public class BaseEntity {
+import org.springframework.data.domain.Persistable;
 
+@MappedSuperclass
+public class BaseEntity implements Persistable<Long> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;

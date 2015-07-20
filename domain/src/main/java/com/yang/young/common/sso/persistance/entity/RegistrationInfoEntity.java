@@ -2,7 +2,10 @@ package com.yang.young.common.sso.persistance.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -10,21 +13,27 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="REGINFO")
 public class RegistrationInfoEntity extends BaseEntity {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column(name = "USER_NAME")
 	@NotEmpty
-	private String userName;
+	private String username;
 	
 	@Column(name = "PASSWORD")
 	@NotEmpty
 	private String password;
 	
 	@Column(name = "STATUS")
-	@NotEmpty
-	private int status;
+	@NotNull
+	@Enumerated(EnumType.ORDINAL)
+	private AccountStatus status = AccountStatus.Enabled;
 	
 	@Column(name = "EXPIRED")
-	@NotEmpty
-	private boolean expired;
+	@NotNull
+	private boolean expired = false;
 	
 	@Column(name = "SOCIAL_ACCOUNT_ID")
 	private String socialAccountId;
@@ -32,13 +41,25 @@ public class RegistrationInfoEntity extends BaseEntity {
 	RegistrationInfoEntity() {
 		
 	}
-
-	public String getUserName() {
-		return userName;
+	
+	public RegistrationInfoEntity(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
+	
+	public RegistrationInfoEntity(String username, String password, AccountStatus status, boolean expired) {
+		this.username = username;
+		this.password = password;
+		this.status = status;
+		this.expired = expired;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUserName(String username) {
+		this.username = username;
 	}
 
 	public String getPassword() {
@@ -49,11 +70,11 @@ public class RegistrationInfoEntity extends BaseEntity {
 		this.password = password;
 	}
 
-	public int getStatus() {
+	public AccountStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
 
@@ -71,6 +92,10 @@ public class RegistrationInfoEntity extends BaseEntity {
 
 	public void setSocialAccountId(String socialAccountId) {
 		this.socialAccountId = socialAccountId;
+	}
+	
+	public static enum AccountStatus {
+		Disabled,Enabled
 	}
 	
 

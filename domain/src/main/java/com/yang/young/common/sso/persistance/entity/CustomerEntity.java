@@ -2,18 +2,23 @@ package com.yang.young.common.sso.persistance.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.joda.time.DateTime;
 
 @Entity
 @Table(name="CUSTOMER")
 public class CustomerEntity extends UserEntity {
 	
 	@Column(name = "TYPE")
-    @NotEmpty
-    private String type;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private CustomerType type = CustomerType.R;
 	
 	@Column(name = "CURRENCY")
     @NotEmpty
@@ -23,6 +28,20 @@ public class CustomerEntity extends UserEntity {
 	private RegistrationInfoEntity regInfo;
 	
 	CustomerEntity(){}
+	
+	public CustomerEntity(int languageId, DateTime lastVisitTime,CustomerType type, String currency, RegistrationInfoEntity regInfo) {
+		this.languageId = languageId;
+		this.lastVisitTime = lastVisitTime;
+		this.type = type;
+		this.currency = currency;
+		this.regInfo = regInfo;
+	}
+	
+	public CustomerEntity(int languageId, String currency, RegistrationInfoEntity regInfo) {
+		this.languageId = languageId;
+		this.currency = currency;
+		this.regInfo = regInfo;
+	}
 
 	public RegistrationInfoEntity getRegInfo() {
 		return regInfo;
@@ -32,11 +51,11 @@ public class CustomerEntity extends UserEntity {
 		this.regInfo = regInfo;
 	}
 
-	public String getType() {
+	public CustomerType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(CustomerType type) {
 		this.type = type;
 	}
 
@@ -51,7 +70,7 @@ public class CustomerEntity extends UserEntity {
 	@Override
 	public String toString() {
 		return String.format("Customer{id:%d, type:%s, userName:'%s', status:'%s'}", 
-				id, type, regInfo == null ? "null" : regInfo.getUserName(), regInfo == null ? "null" : regInfo.getStatus());
+				id, type, regInfo == null ? "null" : regInfo.getUsername(), regInfo == null ? "null" : regInfo.getStatus());
 	}
 	
 	public static enum CustomerType {

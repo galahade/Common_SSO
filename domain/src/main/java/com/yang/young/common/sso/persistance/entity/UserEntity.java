@@ -2,9 +2,9 @@ package com.yang.young.common.sso.persistance.entity;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,13 +12,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class UserEntity extends BaseEntity {
 
 	@Column(name = "language_Id")
-	@NotEmpty
+	@NotNull
 	protected int languageId;
 	
 	@Column(name = "LAST_VISIT_TIME")
 	@Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	private DateTime lastVisitTime;
+	protected DateTime lastVisitTime = DateTime.now();
 
 	public int getLanguageId() {
 		return languageId;
