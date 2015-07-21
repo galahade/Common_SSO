@@ -1,0 +1,8 @@
+My answer is a bit late but I wrote it to help anyone in need. By default, spring security uses a 256-bit key for encryption. This is not permitted by the JDK by default, which supported up to 128-bit keys only.
+
+To solve this, you need need to download the local_policy.jar & US_export_policy.jar jars from oracle (Java Cryptography Extension (JCE) Unlimited Strength Jurisdiction Policy Files 7 Download) and replace them in jdk_path/jre/lib/security/. Make sure you restart the application server for the changes to take effect.
+
+On a separate note, I wouldn't place the secret key in a properties file. Instead I recommend you put it in a key store. If you need help with that let me know.
+
+
+http://www.oracle.com/technetwork/java/javase/downloads/jce-7-download-432124.html
