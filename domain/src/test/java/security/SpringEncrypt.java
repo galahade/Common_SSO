@@ -1,8 +1,11 @@
 package security;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.encrypt.BytesEncryptor;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 import org.springframework.security.crypto.keygen.KeyGenerators;
@@ -16,29 +19,54 @@ public class SpringEncrypt {
 	
 	@Test
 	public void testPasswordEncrypt() {
-		PasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		List<String> encryptPasswords = new ArrayList<String>();
 		int i = 0;
 		while(i<10) {
+			PasswordEncoder encoder = new BCryptPasswordEncoder();
 			String hashedPassword = encoder.encode(password);
-			System.out.println(hashedPassword);
+			encryptPasswords.add(hashedPassword);
 			i++;
+		}
+		for(String text : encryptPasswords) {
+			PasswordEncoder encoder = new BCryptPasswordEncoder();
+			System.out.println(text);
+			assertTrue(encoder.matches(password, text));
 		}
 	}
 	
 	@Test
-	public void testByteEncrypt() {
-		try{
+	public void testTextEncrypt() {
 		String text = "young";
+		System.out.println("original text is:" +text);
 		String salt = KeyGenerators.string().generateKey();
 		System.out.println("the salt is :"+salt);
 		
 		TextEncryptor textEncryptor = Encryptors.text(password, salt);
-		String encryptText = textEncryptor.encrypt(text);
-		System.out.println("encrypt text is : " + encryptText);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
+		for(int i = 0 ; i < 10 ; i++) {
+			String encryptText = textEncryptor.encrypt(text);
+			System.out.println("encrypt text is : " + encryptText);
+			System.out.println("decrypt test is " + textEncryptor.decrypt(encryptText));
+			System.out.println("--------------------------------------------------");
+		}
+	}
+		
+		@Test
+		public void testQueryableEncrypt() {
+			String text = "young";
+			System.out.println("original text is:" +text);
+			String salt = KeyGenerators.string().generateKey();
+			System.out.println("the salt is :"+salt);
+			
+			TextEncryptor textEncryptor = Encryptors.queryableText(password, salt);
+			
+			for(int i = 0 ; i < 10 ; i++) {
+				String encryptText = textEncryptor.encrypt(text);
+				System.out.println("encrypt text is : " + encryptText);
+				System.out.println("decrypt test is " + textEncryptor.decrypt(encryptText));
+				System.out.println("--------------------------------------------------");
+			}
 	}
 
 }
