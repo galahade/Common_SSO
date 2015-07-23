@@ -5,10 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.yang.young.common.sso.persistance.entity.CustomerEntity;
-import com.yang.young.common.sso.persistance.entity.RegistrationInfoEntity;
-import com.yang.young.common.sso.persistance.repository.CustomerRepository;
-import com.yang.young.common.sso.persistance.repository.RegistrationInfoRepository;
+import com.yang.young.common.sso.persistance.jpa.entity.CustomerEntity;
+import com.yang.young.common.sso.persistance.jpa.entity.RegistrationInfoEntity;
+import com.yang.young.common.sso.persistance.jpa.repository.CustomerRepository;
+import com.yang.young.common.sso.persistance.jpa.repository.RegistrationInfoRepository;
 
 
 @SpringBootApplication

@@ -1,4 +1,4 @@
-package com.yang.young.common.sso.persistance.entity;
+package com.yang.young.common.sso.persistance.jpa.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
