@@ -6,26 +6,44 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.yang.young.common.sso.persistance.jpa.entity.CustomerEntity;
-import com.yang.young.common.sso.persistance.jpa.entity.RegistrationInfoEntity;
+import com.yang.young.common.sso.persistance.jpa.entity.GroupEntity;
+import com.yang.young.common.sso.persistance.jpa.entity.RoleEntity;
 import com.yang.young.common.sso.persistance.jpa.repository.CustomerRepository;
-import com.yang.young.common.sso.persistance.jpa.repository.RegistrationInfoRepository;
+import com.yang.young.common.sso.persistance.jpa.repository.GroupRepository;
+import com.yang.young.common.sso.persistance.jpa.repository.RoleRepository;
 
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 	
 	@Autowired
-	RegistrationInfoRepository regInfoRepository;
-	
-	@Autowired
 	CustomerRepository customerRepository;
 	
+	@Autowired
+	RoleRepository roleRepository;
+	
+	@Autowired
+	GroupRepository groupRepository;	
 
 	@Override
 	public void run(String... arg0) throws Exception {
 		//save customer
-		RegistrationInfoEntity regEntity = regInfoRepository.save(new RegistrationInfoEntity("yyang", "123456"));
-		customerRepository.save(new CustomerEntity(-1, "USD", regEntity));
+		RoleEntity role1 = new RoleEntity("Seller");
+		RoleEntity role2 = new RoleEntity("Customer");
+		roleRepository.save(role1);
+		roleRepository.save(role2);
+		
+		GroupEntity group = new GroupEntity("customer_group");
+		
+		group.getRoles().add(role1);
+		group.getRoles().add(role2);
+		groupRepository.save(group);
+		
+		
+		CustomerEntity customerEntity = new CustomerEntity("yyang","password","yyang@salmon.com", -1, "USD");
+		customerEntity.getGroups().add(group);
+		
+		customerRepository.save(customerEntity);
 		
 		//fetch all customer
 		System.out.println("Customers found with findAll():");
