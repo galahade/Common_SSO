@@ -12,6 +12,6 @@ public class TestAuthorityService {
 	public String getMessage() {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		return "Hello " + auth.getName();
+		return "Hello " + auth;
 	}
 }

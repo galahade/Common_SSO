@@ -2,8 +2,6 @@ package security;
 
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -55,8 +55,36 @@ public class WithMockUserTest {
 	TestAuthorityService service ;
 	
 	@Test(expected=AuthenticationCredentialsNotFoundException.class)
-	public void get() {
+	public void getMessageUnauthenticated() {
 		service.getMessage();
 	}
+	
+	@Test
+	@WithMockUser
+	public void getMessageWithMockUser() {
+		String message = service.getMessage();
+		System.out.println(message);
+	}
+	
+	@Test
+	@WithMockUser("customUsername")
+	public void getMessageWithMockUserCustomerUsername() {
+		String message = service.getMessage();
+		System.out.println(message);
+	}
+	
+	@Test
+	@WithMockUser(username="admin",roles={"USER","ADMIN"})
+	public void getMessageWithMockUserCustomerUser() {
+		String message = service.getMessage();
+		System.out.println(message);
+	}
+	
+	/*@Test
+	@WithUserDetails
+	public void getMesageWithUserDetails() {
+		String message = service.getMessage();
+		System.out.println(message);
+	}*/
 
 }

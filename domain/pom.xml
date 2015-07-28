@@ -43,6 +43,19 @@
 			<artifactId>usertype.core</artifactId>
 			<version>${jadira-usertype-core.version}</version>
 		</dependency>
+		<!-- spring security -->
+		<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
+		<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-test</artifactId>
+		</dependency>
 	</dependencies>
 
 </project>

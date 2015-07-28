@@ -25,6 +25,8 @@
 		<java-version>1.8</java-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<org.springframework.boot>1.2.4.RELEASE</org.springframework.boot>
+		<org.springframework>4.1.7.RELEASE</org.springframework>
+		<org.springframework.security>4.0.2.RELEASE</org.springframework.security>
 		<org.aspectj-version>1.6.10</org.aspectj-version>
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 		<mockito.version>1.9.5</mockito.version>
@@ -52,10 +54,13 @@
             <scope>import</scope>
         </dependency>
         -->
+        <!-- this security version is too old 
         <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<exclusions></exclusions>
 		</dependency>
+		-->
 		<dependency>
 			<groupId>com.jayway.jsonpath</groupId>
 			<artifactId>json-path</artifactId>
@@ -95,6 +100,26 @@
 				<groupId>org.springframework.plugin</groupId>
 				<artifactId>spring-plugin-core</artifactId>
 				<version>1.1.0.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${org.springframework}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${org.springframework.security}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${org.springframework.security}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-test</artifactId>
+				<version>${org.springframework.security}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

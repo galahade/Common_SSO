@@ -10,8 +10,8 @@ logging:
     level:
         bookmarks: DEBUG
         org.springframework.web: DEBUG   
-        org.h2: INFO
-        org.hibernate: INFO
+      #  org.h2: INFO
+      #  org.hibernate: INFO
      
 test:
     name:common
