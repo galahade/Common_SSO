@@ -2,6 +2,8 @@ package security;
 
 import java.util.List;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -25,7 +26,7 @@ import com.yang.young.common.sso.service.TestAuthorityService;
 @ContextConfiguration(classes = Application.class)
 public class WithMockUserTest {
 	
-	//@Before
+	@Before
 	public void setup() {
 		//save customer
 				RoleEntity role1 = new RoleEntity("Seller");
@@ -46,7 +47,7 @@ public class WithMockUserTest {
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 	}
 
-	//@After
+	@After
 	public void cleanup() {
 		SecurityContextHolder.clearContext();
 	}
@@ -55,7 +56,7 @@ public class WithMockUserTest {
 	TestAuthorityService service ;
 	
 	@Test(expected=AuthenticationCredentialsNotFoundException.class)
-	public void getMessageUnauthenticated() {
+	public void GETMESSAGEUNAUTHENTICATED() {
 		service.getMessage();
 	}
 	
