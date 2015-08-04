@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -56,7 +57,7 @@ public class CustomerEntity extends UserEntity {
     @NotEmpty
     private String currency;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="USER_GROUP",
 				joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
 				inverseJoinColumns=@JoinColumn(name="GROUP_ID", referencedColumnName="ID"))
@@ -171,6 +172,19 @@ public class CustomerEntity extends UserEntity {
 
 	public void setSocialAccountId(String socialAccountId) {
 		this.socialAccountId = socialAccountId;
+	}
+	
+	public Set<String> getRoles() {
+		Set<String> roles = new HashSet<String>();
+		if(this.groups != null) {
+			for(GroupEntity group : groups) {
+				Set<RoleEntity> roleSet = group.getRoles();
+				for(RoleEntity role : roleSet) {
+					roles.add(role.getName());
+				}
+			}
+		}
+		return roles;
 	}
 
 }

@@ -1,12 +1,6 @@
 package com.yang.young.common.sso.persistance.jpa.entity;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 

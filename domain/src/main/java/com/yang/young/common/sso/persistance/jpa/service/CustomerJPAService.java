@@ -21,5 +21,9 @@ public class CustomerJPAService {
 	public Optional<CustomerEntity> findCustomerByName(String username) {
 		return customerRepository.findByUsername(username);
 	}
+	
+	public CustomerEntity saveCustomer(CustomerEntity customer) {
+		return customerRepository.save(customer);
+	}
 
 }

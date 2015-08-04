@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -21,7 +22,7 @@ public class GroupEntity extends BaseEntity {
 	@NotEmpty
 	private String name;
 	
-	@ManyToMany
+	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="GROUP_ROLE",
 				joinColumns=@JoinColumn(name="GROUP_ID",referencedColumnName="id"),
 				inverseJoinColumns=@JoinColumn(name="ROLE_ID",referencedColumnName="id")
