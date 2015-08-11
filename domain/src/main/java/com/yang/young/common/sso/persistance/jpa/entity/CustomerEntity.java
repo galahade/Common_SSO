@@ -121,7 +121,7 @@ public class CustomerEntity extends UserEntity {
 	}
 	
 	public static enum AccountStatus {
-		Disabled,Enabled
+		Disabled,Enabled,Locked
 	}
 
 	public String getUsername() {
