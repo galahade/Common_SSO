@@ -14,6 +14,7 @@ import com.yang.young.common.sso.persistance.jpa.entity.CustomerEntity.AccountSt
 import com.yang.young.common.sso.persistance.jpa.service.CustomerJPAService;
 
 
+
 public class DBUserDetailsServiceHandler implements UserDetailsService {
 
 	@Autowired

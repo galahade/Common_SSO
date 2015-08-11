@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.yang.young.common.sso.persistance.jpa.repository.CustomerRepository;
-import com.yang.young.common.sso.persistance.jpa.service.CustomerJPAService;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackages="com.yang.young.common.sso.persistance.jpa.repository")

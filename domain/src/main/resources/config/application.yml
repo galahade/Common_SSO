@@ -5,12 +5,11 @@ spring:
         name: bookmark
     datasource:
         driverClassName: org.h2.Driver
-        url: jdbc:h2:tcp://localhost/~/sso
+        url: jdbc:h2:~/sso
         username: sa
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect 
         show-sql: true       
-        hibernate.ddl-auto:create
 
 server:
     port: 9000
@@ -24,44 +23,3 @@ logging:
      
 test:
     name:common
-#dev evn
----
-spring:
-    profiles: development
-    application:
-        name: bookmark
-
-        
-server:
-    port: 8080
-
-   
-logging:
-    level:
-        bookmarks: DEBUG
-        org.springframework.web: DEBUG 
-test:
-    name: development
-    
-#production evn
----
-
-spring:
-    profiles: production
-    application:
-        name: bookmark
-    datasource:
-        driverClassName: org.h2.Driver
-        url: jdbc:h2:tcp://localhost/~/bookmark
-        username: sa
-        
-server:
-    port: 80
-          
-logging:
-    level:
-        bookmarks: INFO
-        org.springframework.web: INFO
-
-test:
-    name: production
