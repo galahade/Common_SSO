@@ -14,6 +14,9 @@ public class CustomerJPAService {
 	private final CustomerRepository customerRepository;
 	
 	@Autowired
+	private GroupJPAService groupService;
+	
+	@Autowired
 	public CustomerJPAService(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
@@ -25,5 +28,13 @@ public class CustomerJPAService {
 	public CustomerEntity saveCustomer(CustomerEntity customer) {
 		return customerRepository.save(customer);
 	}
+	
+	public CustomerEntity saveCustomerWithDefaultRole(CustomerEntity customer) {
+		customer.getGroups().add(groupService.creatDefaultGroups());
+		customer = saveCustomer(customer);
+		return customer;
+	}
+	
+
 
 }

@@ -1,5 +1,8 @@
 package com.yang.young.common.sso;
 
+import java.sql.SQLException;
+
+import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -55,6 +58,7 @@ public class Application implements CommandLineRunner {
 	}
 	
 	public static void main(String[] args) {
+
 		SpringApplication.run(Application.class, args);
 	}
 
