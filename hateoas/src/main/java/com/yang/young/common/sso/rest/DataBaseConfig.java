@@ -4,6 +4,8 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 public abstract class DataBaseConfig {
 
@@ -24,6 +26,7 @@ class StandalongDatabaseConfig extends DataBaseConfig {
 	
 	@Bean
 	public DataSource dataSource() {
+		new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2);
 		org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
 		//dataSource.setUrl("jdbc:h2:tcp://localhost/~/sso");
