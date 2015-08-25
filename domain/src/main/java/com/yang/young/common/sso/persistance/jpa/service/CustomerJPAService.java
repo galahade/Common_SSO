@@ -30,7 +30,7 @@ public class CustomerJPAService {
 	}
 	
 	public CustomerEntity saveCustomerWithDefaultRole(CustomerEntity customer) {
-		customer.getGroups().add(groupService.creatDefaultGroups());
+		customer.getGroups().add(groupService.getCustomerGroup());
 		customer = saveCustomer(customer);
 		return customer;
 	}

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 public abstract class DataBaseConfig {
 
-	//@Bean
+	@Bean
 	public abstract DataSource dataSource();
 	
 	protected void configureDataSource(org.apache.tomcat.jdbc.pool.DataSource dataSource) {
@@ -19,15 +19,17 @@ public abstract class DataBaseConfig {
 	}
 }
 
-//@Configuration
+@Configuration
 class StandalongDatabaseConfig extends DataBaseConfig {
+
 	
-	//@Bean
+
+	@Bean
 	public DataSource dataSource() {
 		org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
-		dataSource.setUrl("jdbc:h2:tcp://localhost/~/sso");
-		//dataSource.setUrl("jdbc:h2:mem:sso");
+		//dataSource.setUrl("jdbc:h2:tcp://localhost/~/sso");
+		dataSource.setUrl("jdbc:h2:tcp://localhost:8043/~/sso");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		dataSource.setValidationQuery("SELECT 1");

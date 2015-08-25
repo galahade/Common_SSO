@@ -14,18 +14,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.yang.young.common.sso.security.DBUserDetailsServiceHandler;
 
-//@Configuration
-//@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled=true)
+@Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class SecurityConfig {
 	
-	//@Autowired
+	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.authenticationProvider(getDBAuthenticationProvide());
 	}
 
 	
-	//@Bean 
+	@Bean 
 	public AuthenticationProvider getDBAuthenticationProvide() {
 		DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 		provider.setUserDetailsService(getDBUserDetailsService());
@@ -33,12 +33,12 @@ public class SecurityConfig {
 		return provider;
 	}
 	
-	//@Bean 
+	@Bean 
 	public UserDetailsService getDBUserDetailsService() {
 		return new DBUserDetailsServiceHandler();
 	}
 	
-	//@Bean 
+	@Bean 
 	public PasswordEncoder getEncoder() {
 		PasswordEncoder encoder = new BCryptPasswordEncoder();
 		return encoder;

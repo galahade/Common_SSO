@@ -5,7 +5,11 @@ spring:
         name: bookmark
     jpa:
         database-platform: org.hibernate.dialect.H2Dialect 
-        show-sql: true       
+        show-sql: true   
+        hibernate.ddl-auto: none      
+    datasource:
+        schema: classpath:config/sql/schema.sql
+        data: classpath:config/sql/Group_Role_data.sql    
 
 server:
     port: 9000
