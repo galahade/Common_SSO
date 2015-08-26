@@ -12,12 +12,11 @@
 	<artifactId>security</artifactId>
 
 	<dependencies>
-<!-- -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+			
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>domain</artifactId>
