@@ -13,8 +13,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 
 import com.yang.young.common.sso.security.DBUserDetailsServiceHandler;
+import com.yang.young.common.sso.security.RestAuthenticationEntryPoint;
 
 @Configuration
 @EnableWebSecurity
@@ -31,12 +33,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //logger.debug("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity).");
         http.csrf().disable()
+        	.exceptionHandling().authenticationEntryPoint(getRestAuthenticationEntryPoint())
+        	.and()
         	.authorizeRequests() 
         	.antMatchers("/rest/logon","/rest/register").anonymous()
         	.antMatchers("/rest/account/**").authenticated()
         	;
             
     }
+	
+	private AuthenticationEntryPoint getRestAuthenticationEntryPoint() {
+		return new RestAuthenticationEntryPoint();
+	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
