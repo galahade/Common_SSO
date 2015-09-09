@@ -15,27 +15,34 @@ import com.yang.young.common.sso.rest.model.UserModel;
 public class RestUsernamePasswordAuthenticationFilter extends
 		UsernamePasswordAuthenticationFilter {
 	
+	private Gson gson = new GsonBuilder().create();
+	
+	private static ThreadLocal<UserModel> userModel = new ThreadLocal<UserModel>();
+	
 
     protected String obtainPassword(HttpServletRequest request) {
     	
-        return extractUser(request).getUsername();
+        return extractUser(request).getPassword();
     }
 
 
     protected String obtainUsername(HttpServletRequest request) {
-        return extractUser(request).getPassword();
+        return extractUser(request).getUsername();
     }
     
     private UserModel extractUser(HttpServletRequest request) {
-    	Gson gson = new GsonBuilder().create();
-    	UserModel user;
-		try {
-			user = gson.fromJson(request.getReader(), UserModel.class);
-		} catch (JsonSyntaxException | JsonIOException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
+    	UserModel user = userModel.get();
+    	if(user == null) {
+    	
+			try {
+				user = gson.fromJson(request.getReader(), UserModel.class);
+			} catch (JsonSyntaxException | JsonIOException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			userModel.set(user);
+    	}
 		return user;
     }
 

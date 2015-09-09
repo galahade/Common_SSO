@@ -11,12 +11,13 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.annotation.web.configurers.FormLoginConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.yang.young.common.sso.security.DBUserDetailsServiceHandler;
 import com.yang.young.common.sso.security.RestAuthenticationEntryPoint;
@@ -39,17 +40,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //logger.debug("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity).");
         http.csrf().disable()
-        	.formLogin().loginProcessingUrl("/rest/logon")
-        	.and()
-        	.addFilter(getUsernamePasswordAuthenticationFilter())
-        	
+        	.formLogin().disable()
+        	.addFilterBefore(getUsernamePasswordAuthenticationFilter(), SecurityContextHolderAwareRequestFilter.class)
         	.exceptionHandling().authenticationEntryPoint(getRestAuthenticationEntryPoint())
         	.and()
         	.authorizeRequests() 
         	.antMatchers("/rest/logon","/rest/register").anonymous()
         	.antMatchers("/rest/account/**").authenticated()
         	;
-        http.getOrBuild();
             
     }
 	
@@ -63,6 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public UsernamePasswordAuthenticationFilter getUsernamePasswordAuthenticationFilter() {
 		UsernamePasswordAuthenticationFilter filter = new RestUsernamePasswordAuthenticationFilter();
 		filter.setAuthenticationManager(getAuthenticationManager());
+		filter.setRequiresAuthenticationRequestMatcher(new AntPathRequestMatcher("/rest/logon"));;
 		return filter ;
 	}
 	

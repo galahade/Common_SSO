@@ -25,7 +25,7 @@ public class DBUserDetailsServiceHandler implements UserDetailsService {
 			throws UsernameNotFoundException {
 		Optional<CustomerEntity> customerOptional = customerService.findCustomerByName(username);
 		User user = customerOptional.map(a -> new User(a.getUsername(), a.getPassword(), a.getStatus() == AccountStatus.Enabled, 
-						a.isExpired(), true, a.getStatus() != AccountStatus.Locked,
+						!a.isExpired(), true, a.getStatus() != AccountStatus.Locked,
 						AuthorityUtils.createAuthorityList(a.getRoles().toArray(new String[0]))))
 						.orElseThrow(()->new UsernameNotFoundException("could not find the user '"+ username + "'"));
 		
