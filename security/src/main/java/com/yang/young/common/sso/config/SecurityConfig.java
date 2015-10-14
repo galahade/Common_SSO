@@ -7,10 +7,10 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.ProviderManager;
@@ -31,6 +31,7 @@ import com.yang.young.common.sso.security.RestAuthenticationSuccessHandler;
 import com.yang.young.common.sso.security.RestUsernamePasswordAuthenticationFilter;
 
 @Configuration
+@Profile("localDBAuthentication")
 @EnableJpaRepositories(basePackages="com.yang.young.common.sso.persistance.jpa.repository")
 @EntityScan(basePackages="com.yang.young.common.sso.persistance.jpa.entity")
 @ComponentScan(basePackages={"com.yang.young.common.sso.persistance.jpa.service","com.yang.young.common.sso.rest","com.yang.young.common.sso.config"})
