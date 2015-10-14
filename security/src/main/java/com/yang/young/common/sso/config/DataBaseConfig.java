@@ -4,6 +4,7 @@ import javax.sql.DataSource;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 public abstract class DataBaseConfig {
 
@@ -20,6 +21,7 @@ public abstract class DataBaseConfig {
 }
 
 @Configuration
+@Profile("localDBAuthentication")
 class StandalongDatabaseConfig extends DataBaseConfig {
 
 	

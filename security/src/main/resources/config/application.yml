@@ -1,16 +1,7 @@
 #common config
 ---
-spring:
-    jpa:
-        database-platform: org.hibernate.dialect.H2Dialect 
-        show-sql: true  
-        hibernate.ddl-auto: none      
-    datasource:
-        schema: classpath:config/sql/schema.sql
-        data: classpath:config/sql/Group_Role_data.sql
-
 server:
-    port: 9000
+    port: 8080
   
 logging:
     level:
@@ -20,26 +11,16 @@ logging:
       #  org.h2: INFO
       #  org.hibernate: INFO
      
-test:
-    name:common
 #dev evn
 ---
 spring:
     profiles: development
     application:
-        name: bookmark
-
-        
-server:
-    port: 8080
-
-   
+        name: common_security
+       
 logging:
     level:
-        bookmarks: DEBUG
         org.springframework.web: DEBUG 
-test:
-    name: development
     
 #production evn
 ---
@@ -61,5 +42,19 @@ logging:
         bookmarks: INFO
         org.springframework.web: INFO
 
-test:
-    name: production
+#local Authentication config
+---
+spring:
+    profiles: localDBAuthentication
+    
+    jpa:
+        database-platform: org.hibernate.dialect.H2Dialect 
+        show-sql: true  
+        hibernate.ddl-auto: none      
+    datasource:
+        schema: classpath:config/sql/schema.sql
+        data: classpath:config/sql/Group_Role_data.sql
+       
+logging:
+    level:
+        org.springframework.web: DEBUG 

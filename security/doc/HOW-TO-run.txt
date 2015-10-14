@@ -1,0 +1,26 @@
+For test perpose : 
+1,Start a H2 server use 8043 port. (A sample in Evernote/系统命令/Mac命令)
+2,Run Maven cmd to start server. maven goals is "spring-boot:run".
+3,Register a user use postman: 
+	URL is : http://localhost:8080/rest/register
+	Method is : POST
+	Header is : Content-Type : application/json
+	Body is: 
+	{
+		"username":"yyang",
+		"password":"password",
+		"socialAccountId":"yyang@salmon.com"
+	}
+4,Log on this user:
+	URL is : http://localhost:8080/rest/logon
+	Method is : POST
+	Header is : Content-Type : application/json
+	Body is: 
+	{
+		"username":"yyang",
+		"password":"password",
+	}
+5,Get User's infomation:
+	URL is : http://localhost:8080/rest/account/{userId}
+	Method is : GET
+	
