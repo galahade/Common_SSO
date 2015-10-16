@@ -44,13 +44,6 @@ public class DBSecurityConfig {
 	@Order(Ordered.LOWEST_PRECEDENCE - 100)
 	protected static class SigninAuthenticationConfig extends WebSecurityConfigurerAdapter {
 		
-		/*
-		@Override
-		public void configure(WebSecurity web) throws Exception {
-			web.ignoring().antMatchers("/rest/logon","/rest/register");
-	    }
-		*/
-		
 		@Override
 	    protected void configure(HttpSecurity http) throws Exception {
 			
@@ -59,19 +52,6 @@ public class DBSecurityConfig {
 			.anonymous().and().csrf().disable()
 			//make request not be redirect just return 401
 			.exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint());
-			/*
-	        //logger.debug("Using default configure(HttpSecurity). If subclassed this will potentially override subclass configure(HttpSecurity).");
-	        http.csrf().disable()
-	        	.formLogin().disable()
-	        	.addFilterBefore(, SecurityContextHolderAwareRequestFilter.class)
-	        	.exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
-	        	.and()
-	        	.authorizeRequests() 
-	        	.antMatchers("/rest/logon","/rest/register").anonymous()
-	        	.antMatchers("/rest/account/**").authenticated()
-	        	//.antMatchers("/rest/admin/**").hasAnyRole("admin")
-	        	;
-	            */
 	    }
 		
 		@Bean
