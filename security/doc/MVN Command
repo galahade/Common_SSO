@@ -1,0 +1,9 @@
+spring-boot:run
+
+JVM parameter 
+ -Djavax.net.debug=ssl:handshake  --enable the SSL handshake debug mode
+ 
+ 
+ 
+ keytool -import -alias caskeystore -keystore "C:\Program Files\Java\jdk1.8.0_40\jre\lib\security\cacerts" -file C:\security\localhost_cas.cer
+ password : changeit

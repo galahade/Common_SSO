@@ -21,6 +21,6 @@ For test perpose :
 		"password":"password",
 	}
 5,Get User's infomation:
-	URL is : http://localhost:8080/rest/account/{userId}
+	URL is : http://localhost:8080/rest/account/detail
 	Method is : GET
 	

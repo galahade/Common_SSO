@@ -32,11 +32,7 @@ public class LogonController {
 		return new UserResource(customerService.storeUser(user));
 	}
 	
-	@RequestMapping(method=RequestMethod.GET,value="account/{userId}") 
-	public UserResource getAccountInfo(@PathVariable(value="userId") String userId){
-		
-		return new UserResource(customerService.findUser(userId));
-	}
+	
 
 }
 

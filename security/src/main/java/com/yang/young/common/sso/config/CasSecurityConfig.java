@@ -25,8 +25,6 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.yang.young.common.sso.security.RestAuthenticationEntryPoint;
-
 @Configuration
 @Profile("CasAuthentication")
 @EnableWebSecurity
@@ -97,7 +95,7 @@ public class CasSecurityConfig {
 					.authorizeRequests() 
 					.antMatchers("/rest/register").anonymous()
 		        	.antMatchers("/rest/account/**").authenticated()
-		        	.antMatchers("/rest/admin/**").hasAnyRole("admin")
+		        	.antMatchers("/rest/admin/**").authenticated()
         	;
 		}
 
@@ -116,7 +114,7 @@ public class CasSecurityConfig {
 		public UserDetails loadUserDetails(CasAssertionAuthenticationToken token) throws UsernameNotFoundException {
 			List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-			return new User("joe", "joe", authorities);
+			return new User(token.getAssertion().getPrincipal().getName(), "", authorities);
 		}
 
 	}
